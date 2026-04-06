@@ -2,37 +2,34 @@ version: '3.8'
 
 services:
   mongodb:
-    image: mongo:latest
-    container_name: meubanco_mongodb
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    image: mongo:7
+    container_name: mongo_fullstack
     ports:
-      - "27017:27017"
+      - "27019:27017"
     networks:
       - minha_rede_personalizada
     volumes:
-      - mongodb_dados:/data/db
+      - mongo_data:/data/db
 
   mysql:
-    image: mysql:8.0
-    container_name: meubanco_mysql
+    image: mysql:8
+    container_name: mysql_fullstack
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: db_atividade
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: loja_de_carros
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - minha_rede_personalizada
     volumes:
-      - mysql_dados:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+
 
 networks:
   minha_rede_personalizada:
     driver: bridge
 
 volumes:
-  mongodb_dados:
-  mysql_dados:
+  mongo_data:
+  mysql_data:
